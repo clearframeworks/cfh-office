@@ -654,16 +654,9 @@ void SfxApplication::MiscExec_Impl( SfxRequest& rReq )
             sfx2::openUriExternally(sURL, false, rReq.GetFrameWeld());
             break;
         }
+        // CFH modification, 2026-11-07: disable donation dispatch in this fork.
         case SID_DONATION:
-        {
-            // Open donation page based on language + script (BCP47) with language as fall back.
-            OUString aLang = LanguageTag(utl::ConfigManager::getUILocale()).getLanguage();
-            OUString aBcp47 = LanguageTag(utl::ConfigManager::getUILocale()).getBcp47();
-            OUString sURL(officecfg::Office::Common::Menus::DonationURL::get() + //https://hub.libreoffice.org/donation/
-                "?BCP47=" + aBcp47 + "&LOlang=" + aLang );
-            sfx2::openUriExternally(sURL, false, rReq.GetFrameWeld());
             break;
-        }
         case SID_WHATSNEW:
         {
             // Open release notes depending on version and locale
