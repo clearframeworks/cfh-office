@@ -1797,32 +1797,7 @@ void SfxViewFrame::Notify( SfxBroadcaster& /*rBC*/, const SfxHint& rHint )
                         batch->commit();
                     }
 
-                    // inform about donations
-                    const sal_Int64 nLastDonateShown = officecfg::Setup::Product::LastTimeDonateShown::get();
-                    bool bUpdateLastTimeDonateShown = false;
-
-                    if (nLastDonateShown == 0)
-                        bUpdateLastTimeDonateShown = true;
-                    else if (!bIsInfobarShown && nPeriodSec < nNow && nLastDonateShown < nNow - nPeriodSec) // 90d alternating with getinvolved
-                    {
-                        bUpdateLastTimeDonateShown = true;
-
-                        VclPtr<SfxInfoBarWindow> pInfoBar = AppendInfoBar(u"donate"_ustr, u""_ustr, SfxResId(STR_DONATE_TEXT), InfobarType::INFO);
-                        if (pInfoBar)
-                        {
-                            weld::Button& rDonateButton = pInfoBar->addButton();
-                            rDonateButton.set_label(SfxResId(STR_DONATE_BUTTON));
-                            rDonateButton.connect_clicked(LINK(this, SfxViewFrame, DonationHandler));
-                        }
-                    }
-
-                    if (bUpdateLastTimeDonateShown
-                        && !officecfg::Setup::Product::LastTimeDonateShown::isReadOnly())
-                    {
-                        std::shared_ptr<comphelper::ConfigurationChanges> batch(comphelper::ConfigurationChanges::create());
-                        officecfg::Setup::Product::LastTimeDonateShown::set(nNow, batch);
-                        batch->commit();
-                    }
+                    // CFH modification, 2026-11-07: donation infobar removed.
                 }
 #else
                 (void) bIsInfobarShown;
