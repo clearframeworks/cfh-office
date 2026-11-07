@@ -462,8 +462,9 @@
     <prop oor:name="PerformFileExtCheck">
       <value install:module="wnt">true</value>
     </prop>
+    <!-- CFH modification 2026-11-07: do not show donation prompts. -->
     <prop oor:name="ShowDonation">
-     <value install:module="macosxsandbox">false</value>
+     <value>false</value>
     </prop>
   </node>
   <node oor:name="Save">
