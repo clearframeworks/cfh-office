@@ -8,4 +8,5 @@ for asset in intro.png intro-highres.png logo.svg logo_inverted.svg logo-sc.svg 
     exit 1
   fi
 done
+python3 cfh-build/remove-donation.py
 exec ./autogen.sh --enable-release-build --with-product-name='CFH Office' --with-vendor='Coders for Humanity' --with-branding="$PWD/cfh-brand" "$@"
