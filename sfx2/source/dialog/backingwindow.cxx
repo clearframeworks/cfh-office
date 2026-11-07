@@ -209,7 +209,8 @@ BackingWindow::BackingWindow(vcl::Window* i_pParent)
     SetPaintTransparent(false);
 
     // draw the donation image/text
-    const bool bShowDonation(officecfg::Office::Common::Misc::ShowDonation::get());
+    // CFH modification, 2026-11-07: hide donation controls even with an existing profile.
+    const bool bShowDonation(false);
 
     const auto t0 = std::chrono::system_clock::now().time_since_epoch();
     const sal_Int32 nDay = std::chrono::duration_cast<std::chrono::hours>(t0).count()/24; // days since 1970-01-01
